@@ -25,7 +25,7 @@ const App = () => {
     <div className="main-wrapper" ref={ref}>
       <h1>React Hooks Demo</h1>
       {/* <Counter /> */}
-      {/* <Toggle /> */}
+      <Toggle />
       <form
         onSubmit={e => {
           e.preventDefault();
