@@ -7,6 +7,20 @@ const App = () => {
   const [name, setName] = useTitleInput("");
   const ref = useRef();
 
+  const [dishes, setDishes] = useState([]);
+
+  const fetchDishes = async () => {
+    const res = await fetch(
+      "https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes"
+    );
+    const data = await res.json();
+    setDishes(data);
+  };
+
+  useEffect(() => {
+    fetchDishes();
+  }, []);
+
   return (
     <div className="main-wrapper" ref={ref}>
       <h1>React Hooks Demo</h1>
@@ -24,6 +38,18 @@ const App = () => {
         />
         <button>Submit</button>
       </form>
+
+      {dishes.map(dish => (
+        <article className="dish-card">
+          <h3>{dish.name}</h3>
+          <p>{dish.desc}</p>
+          <div className="ingredients">
+            {dish.ingredients.map(ingredient => (
+              <span>{ingredient}</span>
+            ))}
+          </div>
+        </article>
+      ))}
     </div>
   );
 };
