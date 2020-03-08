@@ -13,6 +13,10 @@ h1 {
   border-bottom: solid 2px #fbc89d;
 }
 
+input {
+  margin: 0.5rem;
+}
+
 .form-row {
   margin-bottom: 1rem;
 }
@@ -90,6 +94,7 @@ h1 {
 button {
   display: inline-block;
   text-transform: uppercase;
+  margin-bottom: 1rem;
   background: #f8f5f1;
   color: #333;
   border-radius: 4px;
