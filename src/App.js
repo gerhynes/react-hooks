@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import useAbortableFetch from "use-abortable-fetch";
+import { useSpring, animated } from "react-spring";
 import Toggle from "./Toggle";
 import Counter from "./Counter";
 import { useTitleInput } from "./hooks/useTitleInput";
@@ -12,11 +13,11 @@ const App = () => {
     "https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes"
   );
 
-  if (!data) return null;
+  const props = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 300 });
 
   return (
     <div className="main-wrapper" ref={ref}>
-      <h1>React Hooks Demo</h1>
+      <animated.h1 style={props}>React Hooks Demo</animated.h1>
       {/* <Counter /> */}
       <Toggle />
       <form
@@ -32,17 +33,18 @@ const App = () => {
         <button>Submit</button>
       </form>
 
-      {data.map(dish => (
-        <article className="dish-card">
-          <h3>{dish.name}</h3>
-          <p>{dish.desc}</p>
-          <div className="ingredients">
-            {dish.ingredients.map(ingredient => (
-              <span>{ingredient}</span>
-            ))}
-          </div>
-        </article>
-      ))}
+      {data &&
+        data.map(dish => (
+          <article className="dish-card">
+            <h3>{dish.name}</h3>
+            <p>{dish.desc}</p>
+            <div className="ingredients">
+              {dish.ingredients.map(ingredient => (
+                <span>{ingredient}</span>
+              ))}
+            </div>
+          </article>
+        ))}
     </div>
   );
 };
